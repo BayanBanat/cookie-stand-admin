@@ -3,32 +3,52 @@ import { useState } from "react"
 
 
 export default function Home() {
-  const [input0, setQuestion] = useState('no input !')
-  function submitHandler(event) {
+  const [addCookies, setQuestion] = useState([])
+  const submitHandler=(event) =>{
     event.preventDefault()
-    setQuestion(event.target.input0.value)
-    alert('it just craeted !')
+    const cookies={
+      id: event.target.input0.value.length,
+      location: event.target.input0.value,
+      minCustomersPerHour: parseInt(event.target.input1.value),
+      maxCustomersPerHour: parseInt(event.target.input2.value),
+      avgCookiesPerSale: parseFloat(event.target.input3.value),
+    };
+    setQuestion([...addCookies,cookies])
+    event.target.reset();
 
+    
   }
+
+
+
   return (
     <>
-      <head>
+      <Head>
         <title>Home</title>
-      </head>
+      </Head>
+
+      <div className="flex flex-col min-h-screen">
       <Header />
-      <body className="flex flex-col min-h-screen">
-        <main className="flex flex-col items-center py-4 space-y-8 flex-grow">
+        <main className="flex flex-col items-center flex-grow py-4 space-y-8">
           <Form handler={submitHandler} />
-          <h1 className="p-2 text-gray-500 font-medium ">Repot Table Coming soon ....</h1>
+          {addCookies.length === 0 ? (
+            <p className="p-2 font-medium text-gray-500 ">
+              Report Table Coming Soon...
+            </p>
+          ) : (
+            <pre className="p-2 mt-4 bg-gray-200">
+              {JSON.stringify(addCookies, null, 2)}
+            </pre>
+          )}
 
         </main>
-        <footer className="p-6 mt-8 bg-green-500 text-gray-800 text-2xl font-medium ">
+        <footer className="p-6 mt-8 text-2xl font-medium text-gray-800 bg-green-500 ">
 
           &copy; 2023
 
         </footer>
 
-      </body>
+      </div>
 
 
     </>
@@ -47,30 +67,30 @@ function Header() {
 
 function Form(props) {
   return (
-    <form className="flex flex-col w-3/4 h-200 p-8 mx-auto my-4 bg-green-300 rounded-md" onSubmit={props.handler}>
+    <form className="flex flex-col w-3/4 p-8 mx-auto my-4 bg-green-300 rounded-md h-200" onSubmit={props.handler}>
 
-      <h1 className="text-3xl font-semibold mb-4 text-center">Cookie Stand Admin</h1>
+      <h1 className="mb-4 text-3xl font-semibold text-center">Cookie Stand Admin</h1>
       <div className="flex w-full">
-        <label className="px-2 py-1 text-black-50 text-2xl">Location</label>
+        <label className="px-2 py-1 text-2xl text-black-50">Location</label>
         <input name='input0' className="flex-auto pl-1" />
       </div>
 
 
-      <div className="grid grid-cols-4 gap-4 space-x-4 w-1/2 p-2 mx-auto my-4 flex w-full">
+      <div className="flex grid w-1/2 w-full grid-cols-4 gap-4 p-2 mx-auto my-4 space-x-4">
         <div className="flex flex-col">
-          <label className="px-2 py-1 text-black-50 text-2xl text-center">Minimum Customers Per Hour</label>
-          <input name='input1' className="flex-auto pl-1 h-8" />
+          <label className="px-2 py-1 text-2xl text-center text-black-50">Minimum Customers Per Hour</label>
+          <input name='input1' className="flex-auto h-8 pl-1" />
         </div>
         <div className="flex flex-col">
-          <label className="px-2 py-1 text-black-50 text-2xl text-center">Maxmum Customers Per Hour</label>
-          <input name='input2' className="flex-auto pl-1 h-8" />
+          <label className="px-2 py-1 text-2xl text-center text-black-50">Maxmum Customers Per Hour</label>
+          <input name='input2' className="flex-auto h-8 pl-1" />
         </div>
         <div className="flex flex-col">
-          <label className="px-2 py-1 text-black-50 text-2xl text-center">Average Cookies Per Sale</label>
-          <input name='input3' className="flex-auto pl-1 h-8" />
+          <label className="px-2 py-1 text-2xl text-center text-black-50">Average Cookies Per Sale</label>
+          <input name='input3' className="flex-auto h-8 pl-1" />
         </div>
         <div className="flex ">
-        <button className="w-80 h-28 px-6 py-3 bg-green-500 text-black-50 text-2xl">Create</button>
+        <button className="px-6 py-3 text-2xl bg-green-500 w-80 h-28 text-black-50">Create</button>
 
 
         </div>
