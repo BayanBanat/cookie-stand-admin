@@ -31,9 +31,9 @@ export default function Table({ addCookies }) {
           <tfoot>
             <tr>
               <td className='font-bold bg-green-600 border border-black'>Total</td>
-              {timeSlots.map((slot, index) => (
-                <td key={index} className='bg-green-600 border border-black'></td>
-              ))}
+              {hourlySalesData.map((sales, index) => (
+                  <td key={index} className='bg-green-600 border border-black'>{sales*addCookies.length}</td>
+                ))}
             </tr>
           </tfoot>
         </table>
