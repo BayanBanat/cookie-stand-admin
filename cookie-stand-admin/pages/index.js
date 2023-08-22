@@ -71,9 +71,9 @@ async function PostData(cookies) {
     const cookies = {
       id: event.target.input0.value.length,
       location: event.target.input0.value,
-      minCustomersPerHour: parseInt(event.target.input1.value),
-      maxCustomersPerHour: parseInt(event.target.input2.value),
-      avgCookiesPerSale: parseFloat(event.target.input3.value),
+      minimum_customers_per_hour: parseInt(event.target.input1.value),
+      maximum_customers_per_hour: parseInt(event.target.input2.value),
+      average_cookies_per_sale: parseFloat(event.target.input3.value),
     };
     PostData(cookies)
     
